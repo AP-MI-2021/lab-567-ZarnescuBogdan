@@ -4,6 +4,7 @@ from Domain.cheltuiala import toString
 from Logic.CRUD import adaugaCheltuiala, stergeCheltuiala, modificaCheltuiala
 from Logic.functionalitate1 import stergeToateCheltuielile
 from Logic.functionalitate2 import adunaValoareCheltuieliDupaData
+from Logic.functionalitate3 import celeMaiMariCheltuieli
 
 
 def printMenu():
@@ -12,6 +13,7 @@ def printMenu():
     print('3. Modificare cheltuiala.')
     print('4. Stergere cheltuieli pentru un apartament dat.')
     print('5. Adunare valoare data la toate cheltuielile dintr-o data.')
+    print('6. Afisare cele mai mari cheltuieli pentru fiecare tip de cheltuiala.')
     print('a. Afisare cheltuieli.')
     print('x. Iesire.')
 
@@ -62,6 +64,10 @@ def uiAdunaValoareCheltuieliDupaData(lista):
     return adunaValoareCheltuieliDupaData(data, valoare, lista)
 
 
+def uiCeleMaiMariCheltuieli(lista):
+    return celeMaiMariCheltuieli(lista)
+
+
 def runMenu(lista):
     while True:
         printMenu()
@@ -77,6 +83,8 @@ def runMenu(lista):
             lista = uiStergeToateCheltuielile(lista)
         elif optiune == '5':
             lista = uiAdunaValoareCheltuieliDupaData(lista)
+        elif optiune == '6':
+            print(uiCeleMaiMariCheltuieli(lista))
         elif optiune == 'a':
             showAll(lista)
         elif optiune == 'x':

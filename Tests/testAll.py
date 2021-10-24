@@ -1,6 +1,7 @@
 from Tests.testCRUD import testAdaugaCheltuiala, testStergeCheltuiala, testModificaCheltuiala
 from Tests.testDomain import testCheltuiala
-from Tests.testFunctionalitati import testStergeToateCheltuielile, testAdunaValoareCheltuieliDupaData
+from Tests.testFunctionalitati import testStergeToateCheltuielile, testAdunaValoareCheltuieliDupaData, \
+    testCeleMaiMariCheltuieli
 
 
 def runAllTests():
@@ -10,3 +11,4 @@ def runAllTests():
     testModificaCheltuiala()
     testStergeToateCheltuielile()
     testAdunaValoareCheltuieliDupaData()
+    testCeleMaiMariCheltuieli()

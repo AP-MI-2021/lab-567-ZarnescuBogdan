@@ -4,6 +4,7 @@ from Domain.cheltuiala import getSuma, getData, getNrApartament, getTip
 from Logic.CRUD import adaugaCheltuiala, getByNrApartament
 from Logic.functionalitate1 import stergeToateCheltuielile
 from Logic.functionalitate2 import adunaValoareCheltuieliDupaData
+from Logic.functionalitate3 import celeMaiMariCheltuieli
 
 
 def testStergeToateCheltuielile():
@@ -38,3 +39,14 @@ def testAdunaValoareCheltuieliDupaData():
     assert getSuma(cheltuialaNeupdatata) == 140.0
     assert getData(cheltuialaNeupdatata) == datetime.date(2021, 10, 15)
     assert getTip(cheltuialaNeupdatata) == 'intretinere'
+
+
+def testCeleMaiMariCheltuieli():
+    lista = []
+    lista = adaugaCheltuiala(1, 100.0, datetime.date(2021, 10, 20), 'alte cheltuieli', lista)
+    lista = adaugaCheltuiala(2, 140.0, datetime.date(2021, 10, 15), 'intretinere', lista)
+    lista = adaugaCheltuiala(1, 50.0, datetime.date(2021, 10, 4), 'canal', lista)
+
+    assert celeMaiMariCheltuieli(lista) == [{'nrApartament': 2, 'suma': 140.0, 'data': datetime.date(2021, 10, 15), 'tip': 'intretinere'},
+                                            {'nrApartament': 1, 'suma': 50.0, 'data': datetime.date(2021, 10, 4), 'tip': 'canal'},
+                                            {'nrApartament': 1, 'suma': 100.0, 'data': datetime.date(2021, 10, 20), 'tip': 'alte cheltuieli'}]

@@ -14,6 +14,7 @@ def testAdaugaCheltuiala():
     assert getData(getByNrApartament(5, lista)) == datetime.date(2021, 10, 4)
     assert getTip(getByNrApartament(5, lista)) == 'intretinere'
 
+
 def testStergeCheltuiala():
     lista = []
     lista = adaugaCheltuiala(5, 200.0, datetime.date(2021, 10, 4), 'intretinere', lista)
@@ -29,6 +30,7 @@ def testStergeCheltuiala():
 
     assert len(lista) == 1
     assert getByNrApartament(12, lista) is not None
+
 
 def testModificaCheltuiala():
     lista = []

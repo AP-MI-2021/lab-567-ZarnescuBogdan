@@ -14,6 +14,7 @@ def adaugaCheltuiala(nrApartament, suma, data, tip, lista):
     cheltuiala = creeazaCheltuiala(nrApartament, suma, data, tip)
     return lista + [cheltuiala]
 
+
 def getByNrApartament(nrApartament, lista):
     '''
     Gaseste o cheltuiala cu nr. apartamentului dat intr-o lista.
@@ -26,6 +27,7 @@ def getByNrApartament(nrApartament, lista):
             return cheltuiala
     return None
 
+
 def stergeCheltuiala(nrApartament, lista):
     '''
     Sterge o cheltuiala cu nr. apartamentului dat din lista.
@@ -34,6 +36,7 @@ def stergeCheltuiala(nrApartament, lista):
     :return: o lista de cheltuieli fara elementul cu nr. apartamentului dat
     '''
     return [cheltuiala for cheltuiala in lista if getNrApartament(cheltuiala) != nrApartament]
+
 
 def modificaCheltuiala(nrApartament, suma, data, tip, lista):
     '''

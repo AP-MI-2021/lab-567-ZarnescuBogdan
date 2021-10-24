@@ -12,4 +12,5 @@ def main():
     lista = adaugaCheltuiala(3, 80.0, datetime.date(2021, 10, 3), 'canal', lista)
     runMenu(lista)
 
+
 main()
