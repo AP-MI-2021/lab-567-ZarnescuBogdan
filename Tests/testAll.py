@@ -1,4 +1,4 @@
-from Tests.testCRUD import testAdaugaCheltuiala, testStergeCheltuiala, testModificaCheltuiala
+from Tests.testCRUD import testAdaugaCheltuiala, testStergeCheltuiala, testModificaCheltuiala, testGetByNrApartament
 from Tests.testDomain import testCheltuiala
 from Tests.testFunctionalitati import testStergeToateCheltuielile, testAdunaValoareCheltuieliDupaData, \
     testCeleMaiMariCheltuieli
@@ -7,6 +7,7 @@ from Tests.testFunctionalitati import testStergeToateCheltuielile, testAdunaValo
 def runAllTests():
     testCheltuiala()
     testAdaugaCheltuiala()
+    testGetByNrApartament()
     testStergeCheltuiala()
     testModificaCheltuiala()
     testStergeToateCheltuielile()

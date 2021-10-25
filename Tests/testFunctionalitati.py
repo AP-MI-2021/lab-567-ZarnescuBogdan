@@ -47,6 +47,15 @@ def testCeleMaiMariCheltuieli():
     lista = adaugaCheltuiala(2, 140.0, datetime.date(2021, 10, 15), 'intretinere', lista)
     lista = adaugaCheltuiala(1, 50.0, datetime.date(2021, 10, 4), 'canal', lista)
 
-    assert celeMaiMariCheltuieli(lista) == [{'nrApartament': 2, 'suma': 140.0, 'data': datetime.date(2021, 10, 15), 'tip': 'intretinere'},
+    '''assert celeMaiMariCheltuieli(lista) == [{'nrApartament': 2, 'suma': 140.0, 'data': datetime.date(2021, 10, 15), 'tip': 'intretinere'},
                                             {'nrApartament': 1, 'suma': 50.0, 'data': datetime.date(2021, 10, 4), 'tip': 'canal'},
-                                            {'nrApartament': 1, 'suma': 100.0, 'data': datetime.date(2021, 10, 20), 'tip': 'alte cheltuieli'}]
+                                            {'nrApartament': 1, 'suma': 100.0, 'data': datetime.date(2021, 10, 20), 'tip': 'alte cheltuieli'}]'''
+    assert getNrApartament(celeMaiMariCheltuieli(lista)[0]) == 2
+    assert getNrApartament(celeMaiMariCheltuieli(lista)[1]) == 1
+    assert getNrApartament(celeMaiMariCheltuieli(lista)[2]) == 1
+    assert getTip(celeMaiMariCheltuieli(lista)[0]) == 'intretinere'
+    assert getTip(celeMaiMariCheltuieli(lista)[1]) == 'canal'
+    assert getTip(celeMaiMariCheltuieli(lista)[2]) == 'alte cheltuieli'
+    assert getSuma(celeMaiMariCheltuieli(lista)[0]) == 140.0
+    assert getSuma(celeMaiMariCheltuieli(lista)[1]) == 50.0
+    assert getSuma(celeMaiMariCheltuieli(lista)[2]) == 100.0
