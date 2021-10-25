@@ -14,6 +14,7 @@ def creeazaCheltuiala(nrApartament, suma, data, tip):
         'tip': tip
     }
 
+
 def getNrApartament(cheltuiala):
     '''
     Da nr. de apartament al cheltuielii.
@@ -21,6 +22,7 @@ def getNrApartament(cheltuiala):
     :return: nr. de apartament al cheltuielii
     '''
     return cheltuiala['nrApartament']
+
 
 def getSuma(cheltuiala):
     '''
@@ -30,6 +32,7 @@ def getSuma(cheltuiala):
     '''
     return cheltuiala['suma']
 
+
 def getData(cheltuiala):
     '''
     Da data cheltuielii.
@@ -38,6 +41,7 @@ def getData(cheltuiala):
     '''
     return cheltuiala['data']
 
+
 def getTip(cheltuiala):
     '''
     Da tipul cheltuielii.
@@ -45,6 +49,7 @@ def getTip(cheltuiala):
     :return: tipul cheltuielii: intretinere, canal, alte cheltuieli
     '''
     return cheltuiala['tip']
+
 
 def toString(cheltuiala):
     return 'NrApartament: {}, Suma: {}, Data: {}, Tip: {}'.format(
