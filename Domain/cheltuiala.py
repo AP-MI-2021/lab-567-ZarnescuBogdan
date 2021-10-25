@@ -4,7 +4,7 @@ def creeazaCheltuiala(nrApartament, suma, data, tip):
     :param nrApartament: int
     :param suma: float
     :param data: date
-    :param tipul: string
+    :param tip: string
     :return: un dictionar care contine o cheltuiala
     '''
     return {
