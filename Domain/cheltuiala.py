@@ -7,12 +7,13 @@ def creeazaCheltuiala(nrApartament, suma, data, tip):
     :param tip: string
     :return: un dictionar care contine o cheltuiala
     '''
-    return {
+    '''return {
         'nrApartament': nrApartament,
         'suma': suma,
         'data': data,
         'tip': tip
-    }
+    }'''
+    return [nrApartament, suma, data, tip]
 
 
 def getNrApartament(cheltuiala):
@@ -21,7 +22,8 @@ def getNrApartament(cheltuiala):
     :param cheltuiala: dictionar care reprezinta o cheltuiala
     :return: nr. de apartament al cheltuielii
     '''
-    return cheltuiala['nrApartament']
+    #return cheltuiala['nrApartament']
+    return cheltuiala[0]
 
 
 def getSuma(cheltuiala):
@@ -30,7 +32,8 @@ def getSuma(cheltuiala):
     :param cheltuiala: dictionar care reprezinta o cheltuiala
     :return: suma cheltuielii.
     '''
-    return cheltuiala['suma']
+    #return cheltuiala['suma']
+    return cheltuiala[1]
 
 
 def getData(cheltuiala):
@@ -39,7 +42,8 @@ def getData(cheltuiala):
     :param cheltuiala: dictionar care reprezinta o cheltuiala
     :return: data cheltuielii
     '''
-    return cheltuiala['data']
+    #return cheltuiala['data']
+    return cheltuiala[2]
 
 
 def getTip(cheltuiala):
@@ -48,7 +52,8 @@ def getTip(cheltuiala):
     :param cheltuiala: dictionar care reprezinta o cheltuiala
     :return: tipul cheltuielii: intretinere, canal, alte cheltuieli
     '''
-    return cheltuiala['tip']
+    #return cheltuiala['tip']
+    return cheltuiala[3]
 
 
 def toString(cheltuiala):
