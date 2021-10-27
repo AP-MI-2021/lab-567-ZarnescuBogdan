@@ -23,40 +23,60 @@ def printMenu():
 
 
 def readDate():
-    givenString = input('Dati data, cu elementele separate printr-o liniuta: ')
-    numbersAsString = givenString.split('-')
-    year = int(numbersAsString[0])
-    month = int(numbersAsString[1])
-    day = int(numbersAsString[2])
-    return datetime.date(year, month, day)
+    try:
+        givenString = input('Dati data, cu elementele separate printr-o liniuta: ')
+        numbersAsString = givenString.split('-')
+        year = int(numbersAsString[0])
+        month = int(numbersAsString[1])
+        day = int(numbersAsString[2])
+        return datetime.date(year, month, day)
+    except ValueError as ve:
+        print(f'Error: {ve}')
+        return None
 
 
 def uiAdaugaCheltuiala(lista):
-    id = input('Dati id-ul: ')
-    nrApartament = int(input('Dati nr. apartamentului: '))
-    suma = float(input('Dati suma: '))
-    data = readDate()
-    tip = input('Dati tipul: ')
-    return adaugaCheltuiala(id, nrApartament, suma, data, tip, lista)
+    try:
+        id = input('Dati id-ul: ')
+        nrApartament = int(input('Dati nr. apartamentului: '))
+        suma = float(input('Dati suma: '))
+        data = readDate()
+        if data is None:
+            raise ValueError('Data nu a fost introdusa corespunzator!')
+        tip = input('Dati tipul: ')
+        return adaugaCheltuiala(id, nrApartament, suma, data, tip, lista)
+    except ValueError as ve:
+        print(f'Error: {ve}')
+        return lista
 
 
 def uiStergeCheltuiala(lista):
-    nrApartament = int(input('Dati nr. de apartament al cheltuielii de sters: '))
-    return stergeCheltuiala(nrApartament, lista)
+    id = input('Dati id-ul cheltuielii de sters: ')
+    return stergeCheltuiala(id, lista)
 
 
 def uiModificaCheltuiala(lista):
-    id = input('Dati id-ul: ')
-    nrApartament = int(input('Dati nr. de apartament al cheltuielii de modificat: '))
-    suma = float(input('Dati noua suma: '))
-    data = readDate()
-    tip = input('Dati noul tip: ')
-    return modificaCheltuiala(id, nrApartament, suma, data, tip, lista)
+    try:
+        id = input('Dati id-ul cheltuielii de modificat: ')
+        nrApartament = int(input('Dati noul nr. de apartament: '))
+        suma = float(input('Dati noua suma: '))
+        data = readDate()
+        if data is None:
+            raise ValueError('Data nu a fost introdusa corespunzator!')
+        tip = input('Dati noul tip: ')
+        return modificaCheltuiala(id, nrApartament, suma, data, tip, lista)
+    except ValueError as ve:
+        print(f'Error: {ve}')
+        return lista
 
 
 def uiStergeToateCheltuielile(lista):
-    nrApartament = int(input('Dati nr. de apartament pentru care trebuie sterse toate cheltuielile: '))
-    return stergeToateCheltuielile(nrApartament, lista)
+    try:
+        nrApartament = int(input('Dati nr. de apartament pentru care trebuie sterse toate cheltuielile: '))
+        return stergeToateCheltuielile(nrApartament, lista)
+    except ValueError as ve:
+        print(f'Error: {ve}')
+        return lista
 
 
 def showAll(lista):
@@ -65,9 +85,15 @@ def showAll(lista):
 
 
 def uiAdunaValoareCheltuieliDupaData(lista):
-    data = readDate()
-    valoare = float(input(f'Dati valoarea care trebuie adunata la cheltuielile din data {data}: '))
-    return adunaValoareCheltuieliDupaData(data, valoare, lista)
+    try:
+        data = readDate()
+        if data is None:
+            raise ValueError('Data nu a fost introdusa corespunzator!')
+        valoare = float(input(f'Dati valoarea care trebuie adunata la cheltuielile din data {data}: '))
+        return adunaValoareCheltuieliDupaData(data, valoare, lista)
+    except ValueError as ve:
+        print(f'Error: {ve}')
+        return lista
 
 
 def uiCeleMaiMariCheltuieli(lista):
@@ -85,7 +111,11 @@ def uiSumeLunarePerApartament(lista):
     for nrApartament in rezultat:
         for an in rezultat[nrApartament]:
             for luna in rezultat[nrApartament][an]:
-                print('Apartamentul cu numarul {} are cheltuieli lunare in anul {}, luna {} in valoare de {}'.format(nrApartament, an, luna, rezultat[nrApartament][an][luna]))
+                print('Apartamentul cu numarul {} are cheltuieli lunare in anul {}, luna {} in valoare de {}'.format(
+                    nrApartament,
+                    an,
+                    luna,
+                    rezultat[nrApartament][an][luna]))
 
 
 def runMenu(lista):

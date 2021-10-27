@@ -1,4 +1,5 @@
 from Domain.cheltuiala import getNrApartament
+from Logic.CRUD import getByNrApartament
 
 
 def stergeToateCheltuielile(nrApartament, lista):
@@ -8,8 +9,6 @@ def stergeToateCheltuielile(nrApartament, lista):
     :param lista: lista de cheltuieli
     :return: lista in care cheltuielile apartamentului dat s-au sters
     '''
-    listaNoua = []
-    for cheltuiala in lista:
-        if getNrApartament(cheltuiala) != nrApartament:
-            listaNoua.append(cheltuiala)
-    return listaNoua
+    if getByNrApartament(nrApartament, lista) is None:
+        raise ValueError('Numarul apartamentului dat nu exista!')
+    return [cheltuiala for cheltuiala in lista if getNrApartament(cheltuiala) != nrApartament]

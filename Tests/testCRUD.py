@@ -30,16 +30,19 @@ def testStergeCheltuiala():
     lista = adaugaCheltuiala('1', 5, 200.0, datetime.date(2021, 10, 4), 'intretinere', lista)
     lista = adaugaCheltuiala('2', 12, 50.0, datetime.date(2021, 10, 2), 'canal', lista)
 
-    lista = stergeCheltuiala(5, lista)
+    lista = stergeCheltuiala('1', lista)
 
     assert len(lista) == 1
     assert getByNrApartament(5, lista) is None
     assert getByNrApartament(12, lista) is not None
-
-    lista = stergeCheltuiala(8, lista)
-
-    assert len(lista) == 1
-    assert getByNrApartament(12, lista) is not None
+    try:
+        lista = stergeCheltuiala('8', lista)
+        assert False
+    except ValueError:
+        assert len(lista) == 1
+        assert getByNrApartament(12, lista) is not None
+    except Exception:
+        assert False
 
 
 def testModificaCheltuiala():
@@ -63,11 +66,12 @@ def testModificaCheltuiala():
 
     lista = []
     lista = adaugaCheltuiala('1', 5, 200.0, datetime.date(2021, 10, 4), 'intretinere', lista)
-
-    lista = modificaCheltuiala('2', 8, 100.0, datetime.date(2021, 10, 15), 'canal', lista)
-
-    cheltuialaNeupdatata = getByNrApartament(5, lista)
-    assert getNrApartament(cheltuialaNeupdatata) == 5
-    assert getSuma(cheltuialaNeupdatata) == 200.0
-    assert getData(cheltuialaNeupdatata) == datetime.date(2021, 10, 4)
-    assert getTip(cheltuialaNeupdatata) == 'intretinere'
+    try:
+        lista = modificaCheltuiala('2', 8, 100.0, datetime.date(2021, 10, 15), 'canal', lista)
+        assert False
+    except ValueError:
+        cheltuialaNeupdatata = getByNrApartament(5, lista)
+        assert getNrApartament(cheltuialaNeupdatata) == 5
+        assert getSuma(cheltuialaNeupdatata) == 200.0
+        assert getData(cheltuialaNeupdatata) == datetime.date(2021, 10, 4)
+        assert getTip(cheltuialaNeupdatata) == 'intretinere'

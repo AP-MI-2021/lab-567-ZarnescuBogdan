@@ -24,7 +24,7 @@ def getId(cheltuiala):
     :param cheltuiala: dictionar care reprezinta o cheltuiala
     :return: id-ul cheltuielii
     '''
-    #return cheltuiala['id']
+    # return cheltuiala['id']
     return cheltuiala[0]
 
 
@@ -34,7 +34,7 @@ def getNrApartament(cheltuiala):
     :param cheltuiala: dictionar care reprezinta o cheltuiala
     :return: nr. de apartament al cheltuielii
     '''
-    #return cheltuiala['nrApartament']
+    # return cheltuiala['nrApartament']
     return cheltuiala[1]
 
 
@@ -44,7 +44,7 @@ def getSuma(cheltuiala):
     :param cheltuiala: dictionar care reprezinta o cheltuiala
     :return: suma cheltuielii
     '''
-    #return cheltuiala['suma']
+    # return cheltuiala['suma']
     return cheltuiala[2]
 
 
@@ -54,7 +54,7 @@ def getData(cheltuiala):
     :param cheltuiala: dictionar care reprezinta o cheltuiala
     :return: data cheltuielii
     '''
-    #return cheltuiala['data']
+    # return cheltuiala['data']
     return cheltuiala[3]
 
 
@@ -64,7 +64,7 @@ def getTip(cheltuiala):
     :param cheltuiala: dictionar care reprezinta o cheltuiala
     :return: tipul cheltuielii: intretinere, canal, alte cheltuieli
     '''
-    #return cheltuiala['tip']
+    # return cheltuiala['tip']
     return cheltuiala[4]
 
 

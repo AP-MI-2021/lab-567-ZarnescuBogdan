@@ -4,8 +4,8 @@ from Domain.cheltuiala import getNrApartament, getSuma, getData
 def sumeLunarePerApartament(lista):
     '''
     Determina suma lunara pentru fiecare apartament.
-    :param lista:
-    :return:
+    :param lista: lista de cheltuieli
+    :return: suma lunara pentru fiecare apartament
     '''
     rezultat = {}
     for cheltuiala in lista:

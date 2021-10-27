@@ -9,6 +9,8 @@ def adunaValoareCheltuieliDupaData(data, valoare, lista):
     :param lista: lista de cheltuieli
     :return: lista noua in care la cheltuielile dintr-o data s-a adunat o valoare data
     '''
+    if valoare < 0:
+        raise ValueError('Valoarea de adunat trebuie sa fie un numar pozitiv!')
     listaNoua = []
     for cheltuiala in lista:
         if getData(cheltuiala) == data:
