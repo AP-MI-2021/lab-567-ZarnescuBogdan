@@ -1,17 +1,19 @@
 import datetime
 
-from Domain.cheltuiala import getSuma, getData, getNrApartament, getTip
+from Domain.cheltuiala import getSuma, getData, getNrApartament, getTip, getId
 from Logic.CRUD import adaugaCheltuiala, getByNrApartament
 from Logic.functionalitate1 import stergeToateCheltuielile
 from Logic.functionalitate2 import adunaValoareCheltuieliDupaData
 from Logic.functionalitate3 import celeMaiMariCheltuieli
+from Logic.functionalitate4 import ordonareDescrescatorDupaSuma
+from Logic.functionalitate5 import sumeLunarePerApartament
 
 
 def testStergeToateCheltuielile():
     lista = []
-    lista = adaugaCheltuiala(1, 100.0, datetime.date(2021, 10, 20), 'alte cheltuieli', lista)
-    lista = adaugaCheltuiala(2, 150.0, datetime.date(2021, 10, 15), 'intretinere', lista)
-    lista = adaugaCheltuiala(1, 50.0, datetime.date(2021, 10, 4), 'canal', lista)
+    lista = adaugaCheltuiala('1', 1, 100.0, datetime.date(2021, 10, 20), 'alte cheltuieli', lista)
+    lista = adaugaCheltuiala('2', 2, 150.0, datetime.date(2021, 10, 15), 'intretinere', lista)
+    lista = adaugaCheltuiala('3', 1, 50.0, datetime.date(2021, 10, 4), 'canal', lista)
 
     lista = stergeToateCheltuielile(1, lista)
 
@@ -22,9 +24,9 @@ def testStergeToateCheltuielile():
 
 def testAdunaValoareCheltuieliDupaData():
     lista = []
-    lista = adaugaCheltuiala(1, 100.0, datetime.date(2021, 10, 20), 'alte cheltuieli', lista)
-    lista = adaugaCheltuiala(2, 140.0, datetime.date(2021, 10, 15), 'intretinere', lista)
-    lista = adaugaCheltuiala(1, 50.0, datetime.date(2021, 10, 4), 'canal', lista)
+    lista = adaugaCheltuiala('1', 1, 100.0, datetime.date(2021, 10, 20), 'alte cheltuieli', lista)
+    lista = adaugaCheltuiala('2', 2, 140.0, datetime.date(2021, 10, 15), 'intretinere', lista)
+    lista = adaugaCheltuiala('3', 1, 50.0, datetime.date(2021, 10, 4), 'canal', lista)
 
     lista = adunaValoareCheltuieliDupaData(datetime.date(2021, 10, 20), 50, lista)
 
@@ -43,19 +45,39 @@ def testAdunaValoareCheltuieliDupaData():
 
 def testCeleMaiMariCheltuieli():
     lista = []
-    lista = adaugaCheltuiala(1, 100.0, datetime.date(2021, 10, 20), 'alte cheltuieli', lista)
-    lista = adaugaCheltuiala(2, 140.0, datetime.date(2021, 10, 15), 'intretinere', lista)
-    lista = adaugaCheltuiala(1, 50.0, datetime.date(2021, 10, 4), 'canal', lista)
+    lista = adaugaCheltuiala('1', 1, 100.0, datetime.date(2021, 10, 20), 'alte cheltuieli', lista)
+    lista = adaugaCheltuiala('2', 2, 140.0, datetime.date(2021, 10, 15), 'intretinere', lista)
+    lista = adaugaCheltuiala('3', 1, 50.0, datetime.date(2021, 10, 4), 'canal', lista)
 
-    '''assert celeMaiMariCheltuieli(lista) == [{'nrApartament': 2, 'suma': 140.0, 'data': datetime.date(2021, 10, 15), 'tip': 'intretinere'},
-                                            {'nrApartament': 1, 'suma': 50.0, 'data': datetime.date(2021, 10, 4), 'tip': 'canal'},
-                                            {'nrApartament': 1, 'suma': 100.0, 'data': datetime.date(2021, 10, 20), 'tip': 'alte cheltuieli'}]'''
-    assert getNrApartament(celeMaiMariCheltuieli(lista)[0]) == 2
-    assert getNrApartament(celeMaiMariCheltuieli(lista)[1]) == 1
-    assert getNrApartament(celeMaiMariCheltuieli(lista)[2]) == 1
-    assert getTip(celeMaiMariCheltuieli(lista)[0]) == 'intretinere'
-    assert getTip(celeMaiMariCheltuieli(lista)[1]) == 'canal'
-    assert getTip(celeMaiMariCheltuieli(lista)[2]) == 'alte cheltuieli'
-    assert getSuma(celeMaiMariCheltuieli(lista)[0]) == 140.0
-    assert getSuma(celeMaiMariCheltuieli(lista)[1]) == 50.0
-    assert getSuma(celeMaiMariCheltuieli(lista)[2]) == 100.0
+    rezultat = celeMaiMariCheltuieli(lista)
+
+    assert len(rezultat) == 3
+    assert rezultat['canal'] == 50.0
+    assert rezultat['intretinere'] == 140.0
+
+
+def testOrdonareDescrescatorDupaSuma():
+    lista = []
+    lista = adaugaCheltuiala('1', 1, 100.0, datetime.date(2021, 10, 20), 'alte cheltuieli', lista)
+    lista = adaugaCheltuiala('2', 2, 140.0, datetime.date(2021, 10, 15), 'intretinere', lista)
+    lista = adaugaCheltuiala('3', 1, 50.0, datetime.date(2021, 10, 4), 'canal', lista)
+
+    rezultat = ordonareDescrescatorDupaSuma(lista)
+
+    assert getId(rezultat[0]) == '2'
+    assert getId(rezultat[1]) == '1'
+    assert getId(rezultat[2]) == '3'
+
+
+def testSumeLunarePerApartament():
+    lista = []
+    lista = adaugaCheltuiala('1', 5, 200.0, datetime.date(2021, 10, 15), 'intretinere', lista)
+    lista = adaugaCheltuiala('2', 3, 80.0, datetime.date(2021, 10, 3), 'canal', lista)
+    lista = adaugaCheltuiala('3', 5, 300.0, datetime.date(2020, 8, 25), 'canal', lista)
+    lista = adaugaCheltuiala('4', 5, 350.0, datetime.date(2021, 9, 20), 'alte cheltuieloi', lista)
+    lista = adaugaCheltuiala('5', 5, 150.0, datetime.date(2021, 10, 1), 'alte cheltuieloi', lista)
+
+    rezultat = sumeLunarePerApartament(lista)
+
+    assert rezultat[5][2021][10] == 350.0
+    assert rezultat[3][2021][10] == 80.0

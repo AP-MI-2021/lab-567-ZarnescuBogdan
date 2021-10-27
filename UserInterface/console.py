@@ -5,6 +5,8 @@ from Logic.CRUD import adaugaCheltuiala, stergeCheltuiala, modificaCheltuiala
 from Logic.functionalitate1 import stergeToateCheltuielile
 from Logic.functionalitate2 import adunaValoareCheltuieliDupaData
 from Logic.functionalitate3 import celeMaiMariCheltuieli
+from Logic.functionalitate4 import ordonareDescrescatorDupaSuma
+from Logic.functionalitate5 import sumeLunarePerApartament
 
 
 def printMenu():
@@ -14,6 +16,8 @@ def printMenu():
     print('4. Stergere cheltuieli pentru un apartament dat.')
     print('5. Adunare valoare data la toate cheltuielile dintr-o data.')
     print('6. Afisare cele mai mari cheltuieli pentru fiecare tip de cheltuiala.')
+    print('7. Ordonare cheltuieli descrescator dupa suma.')
+    print('8. Afisare sume lunare pentru fiecare apartament.')
     print('a. Afisare cheltuieli.')
     print('x. Iesire.')
 
@@ -28,11 +32,12 @@ def readDate():
 
 
 def uiAdaugaCheltuiala(lista):
+    id = input('Dati id-ul: ')
     nrApartament = int(input('Dati nr. apartamentului: '))
     suma = float(input('Dati suma: '))
     data = readDate()
     tip = input('Dati tipul: ')
-    return adaugaCheltuiala(nrApartament, suma, data, tip, lista)
+    return adaugaCheltuiala(id, nrApartament, suma, data, tip, lista)
 
 
 def uiStergeCheltuiala(lista):
@@ -41,11 +46,12 @@ def uiStergeCheltuiala(lista):
 
 
 def uiModificaCheltuiala(lista):
+    id = input('Dati id-ul: ')
     nrApartament = int(input('Dati nr. de apartament al cheltuielii de modificat: '))
     suma = float(input('Dati noua suma: '))
     data = readDate()
     tip = input('Dati noul tip: ')
-    return modificaCheltuiala(nrApartament, suma, data, tip, lista)
+    return modificaCheltuiala(id, nrApartament, suma, data, tip, lista)
 
 
 def uiStergeToateCheltuielile(lista):
@@ -65,7 +71,21 @@ def uiAdunaValoareCheltuieliDupaData(lista):
 
 
 def uiCeleMaiMariCheltuieli(lista):
-    return celeMaiMariCheltuieli(lista)
+    rezultat = celeMaiMariCheltuieli(lista)
+    for tip in rezultat:
+        print('Tipul {} are suma maxima {}'.format(tip, rezultat[tip]))
+
+
+def uiOrdonareDescrescatorDupaSuma(lista):
+    showAll(ordonareDescrescatorDupaSuma(lista))
+
+
+def uiSumeLunarePerApartament(lista):
+    rezultat = sumeLunarePerApartament(lista)
+    for nrApartament in rezultat:
+        for an in rezultat[nrApartament]:
+            for luna in rezultat[nrApartament][an]:
+                print('Apartamentul cu numarul {} are cheltuieli lunare in anul {}, luna {} in valoare de {}'.format(nrApartament, an, luna, rezultat[nrApartament][an][luna]))
 
 
 def runMenu(lista):
@@ -84,7 +104,11 @@ def runMenu(lista):
         elif optiune == '5':
             lista = uiAdunaValoareCheltuieliDupaData(lista)
         elif optiune == '6':
-            print(uiCeleMaiMariCheltuieli(lista))
+            uiCeleMaiMariCheltuieli(lista)
+        elif optiune == '7':
+            uiOrdonareDescrescatorDupaSuma(lista)
+        elif optiune == '8':
+            uiSumeLunarePerApartament(lista)
         elif optiune == 'a':
             showAll(lista)
         elif optiune == 'x':

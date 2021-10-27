@@ -6,7 +6,7 @@ from Logic.CRUD import adaugaCheltuiala, getByNrApartament, stergeCheltuiala, mo
 
 def testAdaugaCheltuiala():
     lista = []
-    lista = adaugaCheltuiala(5, 200.0, datetime.date(2021, 10, 4), 'intretinere', lista)
+    lista = adaugaCheltuiala('1', 5, 200.0, datetime.date(2021, 10, 4), 'intretinere', lista)
 
     assert len(lista) == 1
     assert getNrApartament(getByNrApartament(5, lista)) == 5
@@ -17,8 +17,8 @@ def testAdaugaCheltuiala():
 
 def testGetByNrApartament():
     lista = []
-    lista = adaugaCheltuiala(5, 200.0, datetime.date(2021, 10, 4), 'intretinere', lista)
-    lista = adaugaCheltuiala(12, 50.0, datetime.date(2021, 10, 2), 'canal', lista)
+    lista = adaugaCheltuiala('1', 5, 200.0, datetime.date(2021, 10, 4), 'intretinere', lista)
+    lista = adaugaCheltuiala('2', 12, 50.0, datetime.date(2021, 10, 2), 'canal', lista)
 
     assert getByNrApartament(5, lista) is not None
     assert getByNrApartament(12, lista) is not None
@@ -27,8 +27,8 @@ def testGetByNrApartament():
 
 def testStergeCheltuiala():
     lista = []
-    lista = adaugaCheltuiala(5, 200.0, datetime.date(2021, 10, 4), 'intretinere', lista)
-    lista = adaugaCheltuiala(12, 50.0, datetime.date(2021, 10, 2), 'canal', lista)
+    lista = adaugaCheltuiala('1', 5, 200.0, datetime.date(2021, 10, 4), 'intretinere', lista)
+    lista = adaugaCheltuiala('2', 12, 50.0, datetime.date(2021, 10, 2), 'canal', lista)
 
     lista = stergeCheltuiala(5, lista)
 
@@ -44,10 +44,10 @@ def testStergeCheltuiala():
 
 def testModificaCheltuiala():
     lista = []
-    lista = adaugaCheltuiala(5, 200.0, datetime.date(2021, 10, 4), 'intretinere', lista)
-    lista = adaugaCheltuiala(12, 50.0, datetime.date(2021, 10, 2), 'canal', lista)
+    lista = adaugaCheltuiala('1', 5, 200.0, datetime.date(2021, 10, 4), 'intretinere', lista)
+    lista = adaugaCheltuiala('2', 12, 50.0, datetime.date(2021, 10, 2), 'canal', lista)
 
-    lista = modificaCheltuiala(5, 150.0, datetime.date(2021, 10, 10), 'alte cheltuieli', lista)
+    lista = modificaCheltuiala('1', 5, 150.0, datetime.date(2021, 10, 10), 'alte cheltuieli', lista)
 
     cheltuialaUpdatata = getByNrApartament(5, lista)
     assert getNrApartament(cheltuialaUpdatata) == 5
@@ -62,9 +62,9 @@ def testModificaCheltuiala():
     assert getTip(cheltuialaNeupdatata) == 'canal'
 
     lista = []
-    lista = adaugaCheltuiala(5, 200.0, datetime.date(2021, 10, 4), 'intretinere', lista)
+    lista = adaugaCheltuiala('1', 5, 200.0, datetime.date(2021, 10, 4), 'intretinere', lista)
 
-    lista = modificaCheltuiala(8, 100.0, datetime.date(2021, 10, 15), 'canal', lista)
+    lista = modificaCheltuiala('2', 8, 100.0, datetime.date(2021, 10, 15), 'canal', lista)
 
     cheltuialaNeupdatata = getByNrApartament(5, lista)
     assert getNrApartament(cheltuialaNeupdatata) == 5
