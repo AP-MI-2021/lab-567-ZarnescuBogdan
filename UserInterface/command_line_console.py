@@ -18,12 +18,12 @@ def stringToDate(dataAsString):
 
 def runCommand(lista):
     while True:
-        commandLine = input('Dati comanda: ')
-        commandLine = commandLine.split('; ')
+        commandLine = input('Dati comanda(trebuie separate prin ";" , elementele prin ",", iar data este de forma: "year-month-day"): ')
+        commandLine = commandLine.split(';')
         if commandLine[0] == 'exit':
             break
         for command in commandLine:
-            command = command.split(', ')
+            command = command.split(',')
             if command[0] == 'add':
                 if len(command) == 6:
                     try:
