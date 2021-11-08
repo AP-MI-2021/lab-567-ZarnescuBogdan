@@ -37,15 +37,26 @@ def readDate():
         return None
 
 
-def uiAdaugaCheltuiala(lista, undoOperations, redoOperations):
+def uiAdaugaCheltuiala(lista, undoOperations, redoOperations, obiect):
     try:
-        id = input('Dati id-ul: ')
-        nrApartament = int(input('Dati nr. apartamentului: '))
-        suma = float(input('Dati suma: '))
-        data = readDate()
-        if data is None:
-            raise ValueError('Data nu a fost introdusa corespunzator!')
-        tip = input('Dati tipul: ')
+        if len(obiect) == 0:
+            id = input('Dati id-ul: ')
+            nrApartament = int(input('Dati nr. apartamentului: '))
+            suma = float(input('Dati suma: '))
+            data = readDate()
+            if data is None:
+                raise ValueError('Data nu a fost introdusa corespunzator!')
+            tip = input('Dati tipul: ')
+        else:
+            id = obiect[0]
+            nrApartament = int(obiect[1])
+            suma = float(obiect[2])
+            an = obiect[3].year
+            luna = obiect[3].month
+            zi = obiect[3].day
+            data = datetime.date(an, luna, zi)
+            tip = obiect[4]
+
 
         rezultat = adaugaCheltuiala(id, nrApartament, suma, data, tip, lista)
         undoOperations.append([
@@ -59,9 +70,12 @@ def uiAdaugaCheltuiala(lista, undoOperations, redoOperations):
         return lista
 
 
-def uiStergeCheltuiala(lista, undoOperations, redoOperations):
+def uiStergeCheltuiala(lista, undoOperations, redoOperations, obiect):
     try:
-        id = input('Dati id-ul cheltuielii de sters: ')
+        if len(obiect) == 0:
+            id = input('Dati id-ul cheltuielii de sters: ')
+        else:
+            id = obiect[0]
 
         rezultat = stergeCheltuiala(id, lista)
         cheltuialaDeSters = getById(id, lista)
@@ -83,15 +97,25 @@ def uiStergeCheltuiala(lista, undoOperations, redoOperations):
         return lista
 
 
-def uiModificaCheltuiala(lista, undoOperations, redoOperations):
+def uiModificaCheltuiala(lista, undoOperations, redoOperations, obiect):
     try:
-        id = input('Dati id-ul cheltuielii de modificat: ')
-        nrApartament = int(input('Dati noul nr. de apartament: '))
-        suma = float(input('Dati noua suma: '))
-        data = readDate()
-        if data is None:
-            raise ValueError('Data nu a fost introdusa corespunzator!')
-        tip = input('Dati noul tip: ')
+        if len(obiect) == 0:
+            id = input('Dati id-ul cheltuielii de modificat: ')
+            nrApartament = int(input('Dati noul nr. de apartament: '))
+            suma = float(input('Dati noua suma: '))
+            data = readDate()
+            if data is None:
+                raise ValueError('Data nu a fost introdusa corespunzator!')
+            tip = input('Dati noul tip: ')
+        else:
+            id = obiect[0]
+            nrApartament = int(obiect[1])
+            suma = float(obiect[2])
+            an = obiect[3].year
+            luna = obiect[3].month
+            zi = obiect[3].day
+            data = datetime.date(an, luna, zi)
+            tip = obiect[4]
 
         rezultat = modificaCheltuiala(id, nrApartament, suma, data, tip, lista)
         cheltuialaVeche = getById(id, lista)
@@ -113,9 +137,12 @@ def uiModificaCheltuiala(lista, undoOperations, redoOperations):
         return lista
 
 
-def uiStergeToateCheltuielile(lista, undoOperations, redoOperations):
+def uiStergeToateCheltuielile(lista, undoOperations, redoOperations, obiect):
     try:
-        nrApartament = int(input('Dati nr. de apartament pentru care trebuie sterse toate cheltuielile: '))
+        if len(obiect) == 0:
+            nrApartament = int(input('Dati nr. de apartament pentru care trebuie sterse toate cheltuielile: '))
+        else:
+            nrApartament = int(obiect[0])
 
         rezultat = stergeToateCheltuielile(nrApartament, lista)
         cheltuieliDeSters = []
@@ -126,6 +153,7 @@ def uiStergeToateCheltuielile(lista, undoOperations, redoOperations):
             lambda: adaugaCheltuieli(cheltuieliDeSters, rezultat),
             lambda: stergeToateCheltuielile(nrApartament, lista)
         ])
+        redoOperations.clear()
         return rezultat
     except ValueError as ve:
         print(f'Error: {ve}')
@@ -137,12 +165,19 @@ def showAll(lista):
         print(toString(cheltuiala))
 
 
-def uiAdunaValoareCheltuieliDupaData(lista, undoOperations, redoOperations):
+def uiAdunaValoareCheltuieliDupaData(lista, undoOperations, redoOperations, obiect):
     try:
-        data = readDate()
-        if data is None:
-            raise ValueError('Data nu a fost introdusa corespunzator!')
-        valoare = float(input(f'Dati valoarea care trebuie adunata la cheltuielile din data {data}: '))
+        if len(obiect) == 0:
+            data = readDate()
+            if data is None:
+                raise ValueError('Data nu a fost introdusa corespunzator!')
+            valoare = float(input(f'Dati valoarea care trebuie adunata la cheltuielile din data {data}: '))
+        else:
+            an = obiect[0].year
+            luna = obiect[0].month
+            zi = obiect[0].day
+            data = datetime.date(an, luna, zi)
+            valoare = obiect[1]
 
         rezultat = adunaValoareCheltuieliDupaData(data, valoare, lista)
         cheltuieliDeModificat = []
@@ -153,6 +188,7 @@ def uiAdunaValoareCheltuieliDupaData(lista, undoOperations, redoOperations):
             lambda: scadeValoareCheltuieliDupaData(data, valoare, rezultat),
             lambda: adunaValoareCheltuieliDupaData(data, valoare, lista)
         ])
+        redoOperations.clear()
         return rezultat
     except ValueError as ve:
         print(f'Error: {ve}')
@@ -181,15 +217,38 @@ def uiSumeLunarePerApartament(lista):
                     rezultat[nrApartament][an][luna]))
 
 
+def undo(lista, undoOperations, redoOperations):
+    if len(undoOperations) > 0:
+        operations = undoOperations.pop()
+        redoOperations.append(operations)
+        lista = operations[0]()
+    else:
+        print('Nu se poate face undo!')
+
+    return lista
+
+
+def redo(lista, undoOperations, redoOperations):
+    if len(redoOperations) > 0:
+        operations = redoOperations.pop()
+        undoOperations.append(operations)
+        lista = operations[1]()
+    else:
+        print('Nu se poate face redo!')
+
+    return lista
+
+
 def runMenu(lista):
     undoOperations = []
     redoOperations = []
+    obiect = []
     while True:
         printMenu()
         optiune = input('Dati optiunea: ')
 
         if optiune == '1':
-            lista = uiAdaugaCheltuiala(lista, undoOperations, redoOperations)
+            lista = uiAdaugaCheltuiala(lista, undoOperations, redoOperations, obiect)
         elif optiune == '2':
             lista = uiStergeCheltuiala(lista, undoOperations, redoOperations)
         elif optiune == '3':
@@ -205,19 +264,9 @@ def runMenu(lista):
         elif optiune == '8':
             uiSumeLunarePerApartament(lista)
         elif optiune == 'u':
-            if len(undoOperations) > 0:
-                operations = undoOperations.pop()
-                redoOperations.append(operations)
-                lista = operations[0]()
-            else:
-                print('Nu se poate face undo!')
+            lista = undo(lista, undoOperations, redoOperations)
         elif optiune == 'r':
-            if len(redoOperations) > 0:
-                operations = redoOperations.pop()
-                undoOperations.append(operations)
-                lista = operations[1]()
-            else:
-                print('Nu se poate face redo!')
+            lista = redo(lista, undoOperations, redoOperations)
         elif optiune == 'a':
             showAll(lista)
         elif optiune == 'x':

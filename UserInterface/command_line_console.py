@@ -7,7 +7,7 @@ from Logic.functionalitate2 import adunaValoareCheltuieliDupaData
 
 
 def printCommandList():
-    print('Comenzile disponibile sunt: add; update; delete; deleteap; showall; exit.')
+    print('Comenzile disponibile sunt: add; update; delete; deleteap; addallfromdate; showall; help; exit.')
 
 
 def printHelp():
@@ -15,6 +15,7 @@ def printHelp():
     print('update - Modifica o cheltuiala.')
     print('delete - Sterge o cheltuiala dupa Id.')
     print('deleteap - Sterge toate cheltuielile pentru un apartament.')
+    print('addallfromdate - Adauna o valoare la toate cheltuielile dintr-o data.')
     print('showall - Afiseaza toate cheltuielile.')
     print('exit - Iese din meniul acesta.')
 
