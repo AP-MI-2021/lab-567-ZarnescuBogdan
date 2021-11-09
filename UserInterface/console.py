@@ -250,13 +250,13 @@ def runMenu(lista):
         if optiune == '1':
             lista = uiAdaugaCheltuiala(lista, undoOperations, redoOperations, obiect)
         elif optiune == '2':
-            lista = uiStergeCheltuiala(lista, undoOperations, redoOperations)
+            lista = uiStergeCheltuiala(lista, undoOperations, redoOperations, obiect)
         elif optiune == '3':
-            lista = uiModificaCheltuiala(lista, undoOperations, redoOperations)
+            lista = uiModificaCheltuiala(lista, undoOperations, redoOperations, obiect)
         elif optiune == '4':
-            lista = uiStergeToateCheltuielile(lista, undoOperations, redoOperations)
+            lista = uiStergeToateCheltuielile(lista, undoOperations, redoOperations, obiect)
         elif optiune == '5':
-            lista = uiAdunaValoareCheltuieliDupaData(lista, undoOperations, redoOperations)
+            lista = uiAdunaValoareCheltuieliDupaData(lista, undoOperations, redoOperations, obiect)
         elif optiune == '6':
             uiCeleMaiMariCheltuieli(lista)
         elif optiune == '7':
